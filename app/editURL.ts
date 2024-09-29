@@ -11,7 +11,7 @@ export const editURL = async (URL: string, originalURL: string) => {
     })
 
     if(!newURL){
-        const newURL1 = await db.urls.create({
+        await db.urls.create({
             data: {
                 compressed_url: URL.replace(BASE_URL, ''),
                 original_url: originalURL

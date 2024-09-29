@@ -17,7 +17,7 @@ export const compressURL = async (state: stateType, formData: FormData) => {
     if (result.success) {
 
         const compressedURL = genRandomURL();
-        const currentURL = await db.urls.create({
+        await db.urls.create({
             data: {
                 compressed_url: compressedURL,
                 original_url: result.data,
