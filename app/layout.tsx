@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Fredoka, Lato } from "next/font/google";
+import { Fredoka } from "next/font/google";
 
-const fredoka = Fredoka({subsets: ["latin"]});
+const fredoka = Fredoka({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "URL Compressr",

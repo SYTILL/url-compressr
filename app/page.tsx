@@ -18,10 +18,6 @@ export default function Home() {
         return () => clearTimeout(timer);
     }, [msg])
 
-    const copyN = (N: string) => {
-        navigator.clipboard.writeText(N)
-    }
-
     return (
         <div className="w-screen h-screen bg-slate-800 text-white font-Fredoka tracking-wide flex">
             <div className="flex-1 border-2 flex items-center flex-col justify-between">
@@ -40,7 +36,7 @@ export default function Home() {
                     {stateCompURL.success ? (
                         <div className="mt-12 flex-1 flex flex-col w-[600px]">
                             <div className="self-center text-slate-400">Compressing Done! URL will be available for 7 days.</div>
-                            <div className="self-center text-slate-400">You can edit URL below if you want. (MUST press "Edit URL"')</div>
+                            <div className="self-center text-slate-400">You can edit URL below if you want. (MUST press &#34;Edit URL&#34;)</div>
                             
 
                             <div className="flex justify-evenly h-[32px] m-4 gap-3">
