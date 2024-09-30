@@ -9,4 +9,4 @@ export const genRandomURL = (length = 5): string => {
     return result;
 }
 
-export const BASE_URL = process.env.CURRENT_URL;
+export const BASE_URL = process.env.CURRENT_URL!;

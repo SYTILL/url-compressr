@@ -1,13 +1,13 @@
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
-import { BASE_URL } from "./lib/constants";
 import { editURL } from "./editURL";
+import { BASE_URL } from "./lib/constants";
 
 export function InputEditURL({ compUrl, originalUrl, copyState }: 
     { compUrl: string, originalUrl: string, copyState: Dispatch<SetStateAction<string>> }) {
 
-    const [URL, setURL] = useState(compUrl);
+    const [URL, setURL] = useState(BASE_URL + compUrl);
 
-    useEffect(() => { setURL(compUrl) }, [compUrl])
+    useEffect(() => { setURL(BASE_URL + compUrl) }, [compUrl])
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const regex = /^[a-zA-Z0-9-.,_~!*$&'()*+;=:@?#]+$/
