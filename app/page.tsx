@@ -4,6 +4,7 @@ import Link from "next/link";
 import GithubIcon from "./GithubIcon";
 import { useFormState } from "react-dom";
 import { compressURL } from "./compressURL";
+import { BASE_URL } from "./lib/constants";
 import { useEffect, useState } from "react";
 import { InputEditURL } from "./InputEditURL";
 
