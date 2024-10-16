@@ -15,6 +15,17 @@ export const compressURL = async (state: stateType, formData: FormData) => {
     const result = urlz.safeParse(formData.get("url"));
 
     if (result.success) {
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+        await db.urls.deleteMany({
+            where:{
+                updated_at: {
+                    lt: sevenDaysAgo,
+                }
+            }
+        })
+
 
         const compressedURL = genRandomURL();
         await db.urls.create({

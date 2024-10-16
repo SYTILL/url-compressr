@@ -9,6 +9,8 @@ export default async function redirectLink({ params: { compURL } }: { params: { 
         }
     })
 
+    console.log(originalURL);
+
     if(originalURL){
         redirect(originalURL.original_url);
     }

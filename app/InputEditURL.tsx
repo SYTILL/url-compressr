@@ -1,8 +1,8 @@
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
-import { editURL } from "./editURL";
 import { BASE_URL } from "./lib/constants";
+import { editURL } from "./editURL";
 
-export function InputEditURL({ compUrl, originalUrl, copyState }: 
+export default function InputEditURL({ compUrl, originalUrl, copyState }: 
     { compUrl: string, originalUrl: string, copyState: Dispatch<SetStateAction<string>> }) {
 
     const [URL, setURL] = useState(BASE_URL + compUrl);
