@@ -13,8 +13,8 @@ export default function InputBox({ type, errorMsg }: InputBoxProps) {
             
             <div className="">
                 <input className="h-8 w-64 input-box p-2" name={type.toLowerCase()} type={type.toLowerCase()} placeholder="" />
-                {errorMsg?.map((msg) =>
-                    <div className="text-sm text-red-500 mt-1">{msg}</div>
+                {errorMsg?.map((msg,index) =>
+                    <div key={index} className="text-sm text-red-500 mt-1">{msg}</div>
                 )}
             </div>
         </div>

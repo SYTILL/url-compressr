@@ -9,8 +9,8 @@ import FormButton from "./FormButton";
 
 
 export default function LoginPage() {
-    const [stateLogin, actionLogin] = useFormState(login, null);
-    const [stateSignup, actionSignup] = useFormState(signup, null);
+    const [stateLogin, actionLogin] = useFormState(login, { errors: [], fieldErrors: {} });
+    const [stateSignup, actionSignup] = useFormState(signup, { errors: [], fieldErrors: {} });
 
     return (
         <>
@@ -24,7 +24,7 @@ export default function LoginPage() {
                     <form action={actionLogin} className="flex flex-col gap-4 pr-20">
                         <InputBox type="Username" errorMsg={stateLogin?.fieldErrors.username} />
                         <InputBox type="Password" errorMsg={stateLogin?.fieldErrors.password} />
-                        <FormButton text="Login"/>
+                        <FormButton text="Login" />
                     </form>
 
                     <div className="mt-8 w-96 h-[2px] bg-slate-300"></div>
@@ -37,7 +37,7 @@ export default function LoginPage() {
                         <InputBox type="Username" errorMsg={stateSignup?.fieldErrors.username} />
                         <InputBox type="Email" errorMsg={stateSignup?.fieldErrors.email} />
                         <InputBox type="Password" errorMsg={stateSignup?.fieldErrors.password} />
-                        <FormButton text="Submit"/>
+                        <FormButton text="Submit" />
                     </form>
 
                     {/* result */}

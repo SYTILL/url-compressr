@@ -2,16 +2,22 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// datasource db {
+//   provider = "sqlite"
+//   url      = "file:./database.db"
+// }
+
 datasource db {
-  provider = "sqlite"
-  url      = "file:./database.db"
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Urls {
   compressed_url String   @unique
   original_url   String
   updated_at     DateTime @updatedAt
-  userId         Int?
+  userId         Int
   user           User?    @relation(fields: [userId], references: [id])
 }
 

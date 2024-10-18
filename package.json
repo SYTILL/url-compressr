@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
+    "@stripe/stripe-js": "^4.8.0",
     "@types/bcrypt": "^5.0.2",
+    "@types/stripe": "^8.0.416",
     "bcrypt": "^5.1.1",
     "iron-session": "^8.0.3",
     "is-url": "^1.2.4",
@@ -19,6 +21,7 @@
     "prisma": "^5.20.0",
     "react": "^18",
     "react-dom": "^18",
+    "stripe": "^17.2.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

@@ -1,3 +1,7 @@
 export default function Loading(){
-    return null
+    return (
+        <div className="text-3xl">
+            Redirecting...
+        </div>
+    )
 }

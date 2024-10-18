@@ -3,7 +3,10 @@ import "./globals.css";
 import { Fredoka } from "next/font/google";
 import Topbar from "./Topbar";
 
-const fredoka = Fredoka({ subsets: ["latin"] });
+const fredoka = Fredoka({ 
+  subsets: ["latin"],
+  display: "swap"
+});
 
 export const metadata: Metadata = {
   title: "URL Compressr",
@@ -18,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={fredoka.className}>
-        <div className="w-screen h-screen bg-slate-800  border-2  text-white font-Fredoka tracking-wide flex flex-col">
+        <div className="w-screen min-h-screen h-max bg-slate-800 text-white font-Fredoka tracking-wide flex flex-col">
           <Topbar />
           <div className="flex-1 flex items-center flex-col justify-between">
             {children}

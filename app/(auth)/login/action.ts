@@ -22,7 +22,16 @@ const validateLogin = z.object({
     password: z.string().min(1, "Please enter the password")
 })
 
-export const login = async (prevState: any, formData: FormData) => {
+interface LoginPrevStateProps {
+    errors: string[]; // General errors, if any
+    fieldErrors: {
+        username?: string[]; // Error messages for username field
+        password?: string[]; // Error messages for password field
+        [key: string]: string[] | undefined; // To handle other form fields dynamically
+    };
+}
+
+export const login = async (prevState: LoginPrevStateProps, formData: FormData): Promise<LoginPrevStateProps> => {
     const data = {
         username: formData.get("username"),
         password: formData.get("password"),
@@ -39,14 +48,28 @@ export const login = async (prevState: any, formData: FormData) => {
     else { //if username exists:
         const user = await db.user.findUnique({
             where: { username: result.data.username },
-            select: { password: true },
+            select: { password: true, urls: true, isPro: true },
         });
 
         const ok = await bcrypt.compare(result.data.password, user!.password ?? "");
 
         //log the user in
-        //redirect /profile
         if (ok) {
+
+            //delete OLD URLs on login IF not premium user
+            if (!user?.isPro) {
+                const sevenDaysAgo = new Date();
+                sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+                await db.urls.deleteMany({
+                    where: {
+                        updated_at: {
+                            lt: sevenDaysAgo,
+                        }
+                    }
+                })
+            }
+
             const session = await getSession();
             session.username = result.data.username;
             await session.save();
@@ -54,6 +77,7 @@ export const login = async (prevState: any, formData: FormData) => {
         }
         else {
             return {
+                errors: [],
                 fieldErrors: {
                     password: ["Wrong password."],
                     username: [],
@@ -62,6 +86,14 @@ export const login = async (prevState: any, formData: FormData) => {
         }
     }
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -86,7 +118,18 @@ const validateSignup = z.object({
         .max(PASSWORD_MAX_LENGTH, PASSWORD_MAX_LENGTH_ERROR)
 })
 
-export const signup = async (prevState: any, formData: FormData) => {
+interface SignupPrevStateProps {
+    errors: string[]; // General errors, if any
+    fieldErrors: {
+        username?: string[]; // Error messages for the username field
+        email?: string[];    // Error messages for the email field
+        password?: string[]; // Error messages for the password field
+        [key: string]: string[] | undefined; // For any other fields
+    };
+}
+
+
+export const signup = async (prevState: SignupPrevStateProps, formData: FormData) => {
     const data = {
         username: formData.get("username"),
         email: formData.get("email"),
