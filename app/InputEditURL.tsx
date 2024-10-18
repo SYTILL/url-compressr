@@ -2,7 +2,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "reac
 import { BASE_URL } from "./lib/constants";
 import { editURL } from "./editURL";
 
-export default function InputEditURL({ compUrl, originalUrl, copyState }: 
+export default function InputEditURL({ compUrl, originalUrl, urlID, copyState }:
     { compUrl: string, originalUrl: string, copyState: Dispatch<SetStateAction<string>> }) {
 
     const [URL, setURL] = useState(BASE_URL + compUrl);
@@ -10,17 +10,25 @@ export default function InputEditURL({ compUrl, originalUrl, copyState }:
     useEffect(() => { setURL(BASE_URL + compUrl) }, [compUrl])
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value.length, BASE_URL.length)
+        if (e.target.value.length <= BASE_URL.length) {
+            console.log(2)
+            setURL(BASE_URL)
+            return
+        }
         const regex = /^[a-zA-Z0-9-.,_~!*$&'()*+;=:@?#]+$/
-        if (!(regex.test(e.target.value[e.target.value.length - 1]))) return
-        if (e.target.value.length < BASE_URL.length) setURL(BASE_URL)
-        else setURL(e.target.value)
+        if (!(regex.test(e.target.value[e.target.value.length - 1]))) {
+            console.log(1, e.target.value[e.target.value.length - 1])
+            return
+        }
+        setURL(e.target.value)
     }
 
     const checkEditURL = async () => {
-        if(await editURL(URL, originalUrl)){
+        if (await editURL(URL, originalUrl, urlID)) {
             copyState("Done!");
         }
-        else{
+        else {
             copyState("This URL is taken.");
         }
     }

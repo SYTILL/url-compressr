@@ -1,6 +1,7 @@
 
 import { BASE_URL } from "@/app/lib/constants";
 import CopyButton from "./copy-button";
+import DeleteButton from "./delete-button";
 
 interface ProfileURLsProps {
     URLs: {
@@ -30,7 +31,7 @@ export default function ProfileURLs({ URLs, isPro }: ProfileURLsProps) {
                                     <div className="flex gap-2">
                                         <input className="m-[2px] input-box p-2 h-6 flex-1 text-sm"
                                             type="text" placeholder="asdfasdfsdf" autoComplete="off" value={original_url} readOnly />
-                                        <div className="w-16 border-2 flex justify-center rounded-lg hover:bg-red-500 transition"><span>Delete</span></div>
+                                        <DeleteButton compressed_url={compressed_url}/>
                                     </div>
                                     {/* compress url */}
                                     <div className="flex gap-2">

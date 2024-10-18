@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Urls" ADD COLUMN     "id" SERIAL NOT NULL,
+ADD CONSTRAINT "Urls_pkey" PRIMARY KEY ("id");

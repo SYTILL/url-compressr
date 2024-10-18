@@ -11,6 +11,7 @@ interface stateType {
     compressedURL?: string;
     original_url?: string;
     error_msg?: string;
+    urlID?: number;
 }
 
 export const compressURL = async (state: stateType, formData: FormData): Promise<stateType> => {
@@ -45,15 +46,19 @@ export const compressURL = async (state: stateType, formData: FormData): Promise
         })
 
         const compressedURL = genRandomURL();
-        await db.urls.create({
+        const created_url = await db.urls.create({
             data: {
                 compressed_url: compressedURL,
                 original_url: result.data,
                 userId: userID?.id
+            },
+            select: {
+                id: true
             }
         })
 
         return {
+            urlID: created_url.id,
             success: true,
             compressedURL,
             original_url: result.data,

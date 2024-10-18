@@ -40,7 +40,7 @@ export default function Home() {
 
 
                         <div className="flex justify-evenly h-[32px] m-4 gap-3">
-                            <InputEditURL compUrl={stateCompURL.compressedURL!} originalUrl={stateCompURL.original_url!} copyState={setMsg} />
+                            <InputEditURL compUrl={stateCompURL.compressedURL!} originalUrl={stateCompURL.original_url!} copyState={setMsg} urlID={stateCompURL.urlID!} />
                         </div>
 
                         {<div className={`self-center text-slate-400 transition-all ease-linear duration-150 ${msg != "" ? 'opacity-100' : 'opacity-0'}`}>{msg}</div>}
