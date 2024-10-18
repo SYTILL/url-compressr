@@ -1,6 +1,5 @@
 "use client"
 
-import db from "@/app/lib/db"
 import deleteURL from "./deleteAction"
 
 export default function DeleteButton({ compressed_url }: { compressed_url: string }) {

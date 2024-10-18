@@ -3,7 +3,7 @@ import { BASE_URL } from "./lib/constants";
 import { editURL } from "./editURL";
 
 export default function InputEditURL({ compUrl, originalUrl, urlID, copyState }:
-    { compUrl: string, originalUrl: string, copyState: Dispatch<SetStateAction<string>> }) {
+    { compUrl: string, originalUrl: string, urlID: number, copyState: Dispatch<SetStateAction<string>> }) {
 
     const [URL, setURL] = useState(BASE_URL + compUrl);
 
